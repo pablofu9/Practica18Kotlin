@@ -6,14 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <Button
-        android:id="@+id/btnVer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ver vehiculos" />
-
     <FrameLayout
         android:id="@+id/frame1"
-        android:layout_width="200dp"
-        android:layout_height="611dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Fragment_Detalles">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="id"
+            android:id="@+id/txtIdVehiculo"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Bastidor"
+            android:id="@+id/txtBastidorVehiculo"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Marca"
+            android:id="@+id/txtMarcaVehiculo"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Modelo"
+            android:id="@+id/txtModeloVehiculo"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Combustible"
+            android:id="@+id/txtCombustibleVehiculo"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Color"
+            android:id="@+id/txtColorVehiculo"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="KM"
+            android:id="@+id/txtKMVehiculo"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</FrameLayout>

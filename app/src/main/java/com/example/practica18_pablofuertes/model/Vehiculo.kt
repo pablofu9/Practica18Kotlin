@@ -1,6 +1,6 @@
 package com.example.practica18_pablofuertes.model
 
-class Vehiculo {
+class Vehiculo:java.io.Serializable {
     var _id:Int
     var numeroBastidor:String
     var marca:String

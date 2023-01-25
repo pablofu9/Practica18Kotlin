@@ -10,8 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.practica18_pablofuertes.R
 import com.example.practica18_pablofuertes.controller.SqliteHelper
-import com.example.practica18_pablofuertes.fragments.Fragment_Detalles
-import com.example.practica18_pablofuertes.fragments.Fragment_lista
 import com.example.practica18_pablofuertes.model.Vehiculo
 
 class DialogAnadir():DialogFragment(), DialogInterface.OnClickListener {
@@ -22,7 +20,7 @@ class DialogAnadir():DialogFragment(), DialogInterface.OnClickListener {
     private lateinit var t5:EditText
     private lateinit var t6:EditText
     private lateinit var t7:EditText
-
+    private var onDismissListener: DialogInterface.OnDismissListener? = null
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -64,7 +62,16 @@ class DialogAnadir():DialogFragment(), DialogInterface.OnClickListener {
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
 
+    /*
+    fun setOnDismissListener(onDismissListener: DialogInterface.OnDismissListener?) {
+        this.onDismissListener = onDismissListener
     }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        onDismissListener?.onDismiss(dialog)
+    }
+    */
+
 }

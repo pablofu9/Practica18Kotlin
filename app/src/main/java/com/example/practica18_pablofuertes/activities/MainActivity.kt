@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(), OnFragmentEventListener, View.OnClickL
     val fragment1 = Fragment_lista()
     val fragment2 = Fragment_Detalles()
     val manager = supportFragmentManager
+    val anadir = DialogAnadir()
     private lateinit var floatingButton:FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity(), OnFragmentEventListener, View.OnClickL
         floatingButton.setOnClickListener(this)
         //Cargamos el fragment del listado de vehiculos
         onResume()
+
 
 
     }
@@ -91,12 +93,12 @@ class MainActivity : AppCompatActivity(), OnFragmentEventListener, View.OnClickL
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.floatingButton->{
-                val anadir = DialogAnadir()
                 anadir.show(supportFragmentManager, "anadir")
 
             }
         }
     }
+
 
 
 

@@ -7,24 +7,19 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.AdapterView
 import android.widget.AdapterView.AdapterContextMenuInfo
-import android.widget.ArrayAdapter
-import android.widget.CursorAdapter
 import android.widget.ListView
-import android.widget.Toast
-import androidx.core.view.get
-import androidx.sqlite.db.SupportSQLiteOpenHelper.Configuration
 import com.example.practica18_pablofuertes.R
 import com.example.practica18_pablofuertes.controller.SqliteHelper
 import com.example.practica18_pablofuertes.controller.VehiculoAdapter
+import com.example.practica18_pablofuertes.dialogs.DialogEliminar
 import com.example.practica18_pablofuertes.interfaces.OnFragmentEventListener
-import com.example.practica18_pablofuertes.model.Vehiculo
-import com.example.practica18_pablofuertes.model.VehiculoContract
 
 
 class Fragment_lista : Fragment(), AdapterView.OnItemClickListener {
 
     private lateinit var adapter: VehiculoAdapter
     private lateinit var listaFragment:ListView
+
     private var listener : OnFragmentEventListener?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +38,8 @@ class Fragment_lista : Fragment(), AdapterView.OnItemClickListener {
         }
 
         listaFragment.onItemClickListener = this
+
+
         return view
 
 
@@ -82,6 +79,17 @@ class Fragment_lista : Fragment(), AdapterView.OnItemClickListener {
         val info=item.menuInfo as AdapterContextMenuInfo
         when(item.itemId){
             R.id.menuEliminar->{
+                //Para abrir el dialog de eliminar
+                val eliminar = adapter.getItem(info.position)?.let { DialogEliminar(it) }
+
+                activity?.let { eliminar?.show(it.supportFragmentManager, "eliminar") }
+                /*
+                val bundle=Bundle()
+                val p = listaFragment.adapter?.getItem(info.position)
+                bundle.putString("info",p.toString())
+                d.arguments=bundle
+                fragmentManager?.let { d.show(it, "anadir") }
+                */
 
             }
             R.id.menuModificar->{

@@ -3,16 +3,16 @@ package com.example.practica18_pablofuertes.fragments
 import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.AdapterView.AdapterContextMenuInfo
 import android.widget.ArrayAdapter
 import android.widget.CursorAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.core.view.get
+import androidx.sqlite.db.SupportSQLiteOpenHelper.Configuration
 import com.example.practica18_pablofuertes.R
 import com.example.practica18_pablofuertes.controller.SqliteHelper
 import com.example.practica18_pablofuertes.controller.VehiculoAdapter
@@ -35,10 +35,12 @@ class Fragment_lista : Fragment(), AdapterView.OnItemClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_lista, container, false)
         listaFragment=view.findViewById(R.id.listaFragment)
-        val helper = SqliteHelper(context)
-        val cursor:Cursor=helper.leerVehiculo()
-        adapter = context?.let { VehiculoAdapter(it.applicationContext, cursor,0) }!!
-        listaFragment.adapter=adapter
+        refresh()
+        val orientation = resources.configuration.orientation
+        if(orientation!= android.content.res.Configuration.ORIENTATION_LANDSCAPE){
+            registerForContextMenu(listaFragment)
+
+        }
 
         listaFragment.onItemClickListener = this
         return view
@@ -70,5 +72,29 @@ class Fragment_lista : Fragment(), AdapterView.OnItemClickListener {
             //Desde el main vamos a construir el vehiculo y se lo vamos a pasar al otro fragment
         }
     }
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater = requireActivity().menuInflater
+        inflater.inflate(R.menu.menu, menu)
+    }
 
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info=item.menuInfo as AdapterContextMenuInfo
+        when(item.itemId){
+            R.id.menuEliminar->{
+
+            }
+            R.id.menuModificar->{
+
+            }
+        }
+        return super.onContextItemSelected(item)
+    }
+    fun refresh(){
+        val helper = SqliteHelper(context)
+        val cursor:Cursor=helper.leerVehiculo()
+        adapter = context?.let { VehiculoAdapter(it.applicationContext, cursor,0) }!!
+        listaFragment.adapter=adapter
+
+    }
 }

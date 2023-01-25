@@ -12,38 +12,40 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.practica18_pablofuertes.R
 
 import com.example.practica18_pablofuertes.controller.SqliteHelper
+import com.example.practica18_pablofuertes.dialogs.DialogAnadir
 import com.example.practica18_pablofuertes.fragments.Fragment_Detalles
 import com.example.practica18_pablofuertes.fragments.Fragment_lista
 import com.example.practica18_pablofuertes.interfaces.OnFragmentEventListener
 import com.example.practica18_pablofuertes.model.Vehiculo
 import com.example.practica18_pablofuertes.model.VehiculoContract
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class MainActivity : AppCompatActivity(), OnFragmentEventListener {
+class MainActivity : AppCompatActivity(), OnFragmentEventListener, View.OnClickListener {
 
     val fragment1 = Fragment_lista()
     val fragment2 = Fragment_Detalles()
     val manager = supportFragmentManager
+    private lateinit var floatingButton:FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.practica18_pablofuertes.R.layout.activity_main)
-
+        floatingButton=findViewById(R.id.floatingButton)
+        floatingButton.setOnClickListener(this)
         //Cargamos el fragment del listado de vehiculos
+        onResume()
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         val transaction = manager.beginTransaction()
         transaction.replace(R.id.frame1, fragment1)
         transaction.addToBackStack(null)
         transaction.commit()
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // Landscape
-
-        } else {
-            // Portrait
-        }
-
-
     }
-
 
     override fun onFragmentEvent(cursor: Cursor) {
         val id = cursor.getInt(cursor.getColumnIndexOrThrow(VehiculoContract.ID))
@@ -85,6 +87,17 @@ class MainActivity : AppCompatActivity(), OnFragmentEventListener {
         }
 
     }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.floatingButton->{
+                val anadir = DialogAnadir()
+                anadir.show(supportFragmentManager, "anadir")
+
+            }
+        }
+    }
+
 
 
 }

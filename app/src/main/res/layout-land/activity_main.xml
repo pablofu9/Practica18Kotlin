@@ -17,6 +17,14 @@
         android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:id="@+id/frame2"/>
+        android:id="@+id/frame2">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:layout_gravity="end|bottom"/>
+    </FrameLayout>
 
 </LinearLayout>

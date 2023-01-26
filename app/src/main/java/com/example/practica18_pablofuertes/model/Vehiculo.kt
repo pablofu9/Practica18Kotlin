@@ -27,14 +27,7 @@ class Vehiculo:java.io.Serializable {
         this.km = km
     }
 
-    constructor(
-        numeroBastidor: String,
-        marca: String,
-        modelo: String,
-        combustible: String,
-        color: String,
-        km: Int
-    ) {
+    constructor(numeroBastidor: String, marca: String, modelo: String, combustible: String, color: String, km: Int) {
         this._id=0
         this.numeroBastidor = numeroBastidor
         this.marca = marca

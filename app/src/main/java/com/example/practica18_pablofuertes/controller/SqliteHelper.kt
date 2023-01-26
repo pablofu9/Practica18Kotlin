@@ -28,11 +28,11 @@ class SqliteHelper(context:Context?):SQLiteOpenHelper(context,NAME,null,VERSION)
                     +VehiculoContract.KM + " INTEGER );"
         )
         db?.execSQL(
-            "INSERT INTO " +VehiculoContract.TABLE_NAME + " (_id,numeroBastidor,marca,modelo,combustible,color,km) VALUES" +
-                    "(1, '1GT01ZE81B8481459', 'Audi', 'A3', 'Gasolina', 'Negro', 60000)," +
-                    "(2, '3GCPKTD35B6413373', 'Mercedes', 'Clase A', 'Gasolina', 'Azul', 2000)," +
-                    "(3, 'WVWBM9AJ5B6153742', 'BMW', 'Serie 3', 'Diesel', 'Verde', 120000)," +
-                    "(4, 'WAUDGBFL4B7122927', 'Seat', 'Leon', 'Gasolina', 'Negro', 100);"
+            "INSERT INTO " +VehiculoContract.TABLE_NAME + " (numeroBastidor,marca,modelo,combustible,color,km) VALUES" +
+                    "('1GT01ZE81B8481459', 'Audi', 'A3', 'Gasolina', 'Negro', 60000)," +
+                    "('3GCPKTD35B6413373', 'Mercedes', 'Clase A', 'Gasolina', 'Azul', 2000)," +
+                    "('WVWBM9AJ5B6153742', 'BMW', 'Serie 3', 'Diesel', 'Verde', 120000)," +
+                    "('WAUDGBFL4B7122927', 'Seat', 'Leon', 'Gasolina', 'Negro', 100);"
 
         )
     }
@@ -51,7 +51,6 @@ class SqliteHelper(context:Context?):SQLiteOpenHelper(context,NAME,null,VERSION)
     fun insertarVehiculo(vehiculo:Vehiculo): Long{
         val db = writableDatabase
         val values = ContentValues()
-        values.put(VehiculoContract.ID, vehiculo._id)
         values.put(VehiculoContract.BASTIDOR,vehiculo.numeroBastidor)
         values.put(VehiculoContract.MARCA, vehiculo.marca)
         values.put(VehiculoContract.MODELO, vehiculo.modelo)
@@ -61,6 +60,36 @@ class SqliteHelper(context:Context?):SQLiteOpenHelper(context,NAME,null,VERSION)
 
         return db.insert(VehiculoContract.TABLE_NAME,null, values)
 
+    }
+    //Convertir un vehiculo desde un cursor
+    fun devuelveVehiculo(cursor:Cursor): Vehiculo{
+        val id = cursor.getInt(cursor.getColumnIndexOrThrow(VehiculoContract.ID))
+        val numeroBastidor = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.BASTIDOR))
+        val marca = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.MARCA))
+        val modelo = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.MODELO))
+        val combustible = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.COMBUSTIBLE))
+        val color = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.COLOR))
+        val km = cursor.getInt(cursor.getColumnIndexOrThrow(VehiculoContract.KM))
+
+        val v:Vehiculo= Vehiculo(id,numeroBastidor,marca,modelo,combustible,color,km)
+        return v
+    }
+
+    fun eliminarVehiculo(vehiculo:Vehiculo){
+        val db = writableDatabase
+        db.execSQL("delete from "+VehiculoContract.TABLE_NAME+" where "+VehiculoContract.BASTIDOR+" ='"+vehiculo.numeroBastidor+"'")
+    }
+
+    //Metodo update
+    fun modificarVehiculo(vehiculo: Vehiculo){
+        val db=writableDatabase
+        val values = ContentValues()
+        values.put(VehiculoContract.MARCA,vehiculo.marca)
+        values.put(VehiculoContract.MODELO,vehiculo.modelo)
+        values.put(VehiculoContract.COMBUSTIBLE,vehiculo.combustible)
+        values.put(VehiculoContract.COLOR,vehiculo.color)
+        values.put(VehiculoContract.KM,vehiculo.km)
+        db.update(VehiculoContract.TABLE_NAME, values, VehiculoContract.BASTIDOR+" =?", arrayOf(VehiculoContract.BASTIDOR))
     }
 
 

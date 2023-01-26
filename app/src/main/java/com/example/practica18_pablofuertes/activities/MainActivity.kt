@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), OnFragmentEventListener, View.OnClickL
     val fragment2 = Fragment_Detalles()
     val manager = supportFragmentManager
     val anadir = DialogAnadir()
+    val helper =SqliteHelper(this)
     private lateinit var floatingButton:FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,16 +51,8 @@ class MainActivity : AppCompatActivity(), OnFragmentEventListener, View.OnClickL
     }
 
     override fun onFragmentEvent(cursor: Cursor) {
-        val id = cursor.getInt(cursor.getColumnIndexOrThrow(VehiculoContract.ID))
-        val numeroBastidor = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.BASTIDOR))
-        val marca = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.MARCA))
-        val modelo = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.MODELO))
-        val combustible = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.COMBUSTIBLE))
-        val color = cursor.getString(cursor.getColumnIndexOrThrow(VehiculoContract.COLOR))
-        val km = cursor.getInt(cursor.getColumnIndexOrThrow(VehiculoContract.KM))
-
-        val v:Vehiculo= Vehiculo(id,numeroBastidor,marca,modelo,combustible,color,km)
-
+        
+        val v:Vehiculo=helper.devuelveVehiculo(cursor)
 
         //Si la orientacion es horizontal, lo que hacemos es, enviar en argumentos el vehiculo al otro fragment y desde el otro fragment creamos la vista.
         //Si el otro fragment ya esta cargado, lo borraremos y lo volvemos a crear

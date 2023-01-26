@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.practica18_pablofuertes.R
 import com.example.practica18_pablofuertes.controller.SqliteHelper
+import com.example.practica18_pablofuertes.fragments.Fragment_lista
 import com.example.practica18_pablofuertes.model.Vehiculo
 
 class DialogAnadir():DialogFragment(), DialogInterface.OnClickListener {
-    private lateinit var t1:EditText
     private lateinit var t2:EditText
     private lateinit var t3:EditText
     private lateinit var t4:EditText
@@ -23,11 +23,11 @@ class DialogAnadir():DialogFragment(), DialogInterface.OnClickListener {
     private var onDismissListener: DialogInterface.OnDismissListener? = null
 
 
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder=AlertDialog.Builder(context)
         val inflater=requireActivity().layoutInflater
         val view: View =inflater.inflate(R.layout.ventana_anadir, null)
-        t1=view.findViewById(R.id.t1)
         t2=view.findViewById(R.id.t2)
         t3=view.findViewById(R.id.t3)
         t4=view.findViewById(R.id.t4)
@@ -45,12 +45,12 @@ class DialogAnadir():DialogFragment(), DialogInterface.OnClickListener {
 
         when(p1){
             -1->{
-                if(t1.text.isEmpty() || t2.text.isEmpty() || t3.text.isEmpty() || t4.text.isEmpty() || t5.text.isEmpty() || t6.text.isEmpty() || t7.text.isEmpty()){
+                if(t2.text.isEmpty() || t3.text.isEmpty() || t4.text.isEmpty() || t5.text.isEmpty() || t6.text.isEmpty() || t7.text.isEmpty()){
                     Toast.makeText(context,"Hay algun campo vacio", Toast.LENGTH_LONG).show()
 
                 }else{
                     val v:Vehiculo=
-                        Vehiculo(t1.text.toString().toInt(),t2.text.toString(),t3.text.toString(),t4.text.toString(),t5.text.toString(),t6.text.toString(),t7.text.toString().toInt())
+                        Vehiculo(t2.text.toString(),t3.text.toString(),t4.text.toString(),t5.text.toString(),t6.text.toString(),t7.text.toString().toInt())
                     val helper=SqliteHelper(context)
                     helper.insertarVehiculo(v)
                     Toast.makeText(context,"Vehiculo insertado", Toast.LENGTH_LONG).show()
@@ -63,15 +63,19 @@ class DialogAnadir():DialogFragment(), DialogInterface.OnClickListener {
     }
 
 
-    /*
+
     fun setOnDismissListener(onDismissListener: DialogInterface.OnDismissListener?) {
         this.onDismissListener = onDismissListener
     }
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
+        //Refrescamos el fragment, asi volvemos a cargar la info
+        val fragment = parentFragmentManager.findFragmentById(R.id.frame1) as Fragment_lista
+        fragment.refresh()
         onDismissListener?.onDismiss(dialog)
     }
-    */
+
+
 
 }

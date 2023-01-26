@@ -4,15 +4,17 @@ import android.content.Context
 import android.database.Cursor
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.AdapterView
 import android.widget.AdapterView.AdapterContextMenuInfo
 import android.widget.ListView
+import androidx.fragment.app.Fragment
 import com.example.practica18_pablofuertes.R
 import com.example.practica18_pablofuertes.controller.SqliteHelper
 import com.example.practica18_pablofuertes.controller.VehiculoAdapter
 import com.example.practica18_pablofuertes.dialogs.DialogEliminar
+import com.example.practica18_pablofuertes.dialogs.DialogModificar
 import com.example.practica18_pablofuertes.interfaces.OnFragmentEventListener
+import com.example.practica18_pablofuertes.model.Vehiculo
 
 
 class Fragment_lista : Fragment(), AdapterView.OnItemClickListener {
@@ -80,20 +82,19 @@ class Fragment_lista : Fragment(), AdapterView.OnItemClickListener {
         when(item.itemId){
             R.id.menuEliminar->{
                 //Para abrir el dialog de eliminar
-                val eliminar = adapter.getItem(info.position)?.let { DialogEliminar(it) }
 
-                activity?.let { eliminar?.show(it.supportFragmentManager, "eliminar") }
-                /*
-                val bundle=Bundle()
-                val p = listaFragment.adapter?.getItem(info.position)
-                bundle.putString("info",p.toString())
-                d.arguments=bundle
-                fragmentManager?.let { d.show(it, "anadir") }
-                */
+                //Mandamos un cursor
+
+                val cursor:Cursor = adapter.getItem(info.position) as Cursor
+                val eliminar =DialogEliminar(cursor)
+
+                activity?.let { eliminar.show(it.supportFragmentManager, "eliminar") }
 
             }
             R.id.menuModificar->{
-
+                val cursor:Cursor = adapter.getItem(info.position) as Cursor
+                val eliminar =DialogModificar(cursor)
+                activity?.let { eliminar.show(it.supportFragmentManager, "Modificar") }
             }
         }
         return super.onContextItemSelected(item)

@@ -52,6 +52,9 @@ class DialogAnadir():DialogFragment(), DialogInterface.OnClickListener {
 
 
         //Vamos a hacer un contador para que el bastidor solo se puedan introducir 17 numeros
+        //lo que hemos hecho es hacer un textview que cambie a medida que escribas en el edittext de bastidor, en el que solo podemos escribir 17 caracteres
+        //Entonces cuando ese contador llegue a 0, ya no se podra seguir tecleando en eel campo de texto de bastidor y asi llevamos el control de la cantidad de
+        //caracteres escritos en bastidor
         t2.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 

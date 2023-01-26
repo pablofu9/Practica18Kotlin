@@ -14,7 +14,18 @@
                 android:hint="Bastidor"
                 android:id="@+id/t2"
                 android:layout_margin="6dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:maxLength="17"/>
+
+            <TextView
+                android:id="@+id/contador"
+                android:layout_width="26dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:maxLength="17"
+                android:text="0" />
+
             <EditText
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"

@@ -33,14 +33,14 @@
         <TableRow>
 
 
-            <EditText
+            <Spinner
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:hint="Combustible"
                 android:id="@+id/t5"
                 android:layout_margin="6dp"
                 android:layout_gravity="center"/>
-            <EditText
+            <Spinner
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:hint="Color"
@@ -57,8 +57,5 @@
         </TableRow>
 
     </TableLayout>
-
-
-
 
 </LinearLayout>

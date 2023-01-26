@@ -84,12 +84,13 @@ class SqliteHelper(context:Context?):SQLiteOpenHelper(context,NAME,null,VERSION)
     fun modificarVehiculo(vehiculo: Vehiculo){
         val db=writableDatabase
         val values = ContentValues()
+
         values.put(VehiculoContract.MARCA,vehiculo.marca)
         values.put(VehiculoContract.MODELO,vehiculo.modelo)
         values.put(VehiculoContract.COMBUSTIBLE,vehiculo.combustible)
         values.put(VehiculoContract.COLOR,vehiculo.color)
         values.put(VehiculoContract.KM,vehiculo.km)
-        db.update(VehiculoContract.TABLE_NAME, values, VehiculoContract.BASTIDOR+" =?", arrayOf(VehiculoContract.BASTIDOR))
+        db.update(VehiculoContract.TABLE_NAME, values, VehiculoContract.BASTIDOR+" =?", arrayOf(vehiculo.numeroBastidor))
     }
 
 
